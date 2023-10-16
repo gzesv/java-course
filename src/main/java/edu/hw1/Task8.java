@@ -12,20 +12,25 @@ public class Task8 {
                     continue;
                 }
 
-                if (horseCanCapture(i + 1, j - 2, board)
-                    || horseCanCapture(i + 1, j + 2, board)
-                    || horseCanCapture(i - 1, j - 2, board)
-                    || horseCanCapture(i - 1, j + 2, board)
-                    || horseCanCapture(i + 2, j - 1, board)
-                    || horseCanCapture(i + 2, j + 1, board)
-                    || horseCanCapture(i - 2, j - 1, board)
-                    || horseCanCapture(i - 2, j + 1, board)) {
+                if (checkPosition(i, j, board)) {
                     return false;
                 }
             }
         }
 
         return true;
+    }
+
+    @SuppressWarnings("MagicNumber")
+    private static boolean checkPosition(int i, int j, int[][] board) {
+        return (horseCanCapture(i + 1, j - 2, board)
+            || horseCanCapture(i + 1, j + 2, board)
+            || horseCanCapture(i - 1, j - 2, board)
+            || horseCanCapture(i - 1, j + 2, board)
+            || horseCanCapture(i + 2, j - 1, board)
+            || horseCanCapture(i + 2, j + 1, board)
+            || horseCanCapture(i - 2, j - 1, board)
+            || horseCanCapture(i - 2, j + 1, board));
     }
 
     @SuppressWarnings("MagicNumber")

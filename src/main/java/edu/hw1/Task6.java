@@ -9,11 +9,11 @@ public class Task6 {
     private final static int KAPREKAR = 6174;
     private final static int LEFT_EDGE = 1000;
     private final static int RIGHT_EDGE = 9999;
-    private final static int TEN = 10;
+    private final static int NUMBERS_SAME = 1111;
 
     @SuppressWarnings("MagicNumber")
     public static int countK(int number) {
-        if (number < LEFT_EDGE || number > RIGHT_EDGE || number % 1111 == 0) {
+        if (number < LEFT_EDGE || number > RIGHT_EDGE || number % NUMBERS_SAME == 0) {
             return -1;
         }
 
@@ -29,8 +29,8 @@ public class Task6 {
         int number = inputNumber;
         List<Integer> digits = new ArrayList<>();
         while (number != 0) {
-            digits.add(number % TEN);
-            number /= TEN;
+            digits.add(number % 10);
+            number /= 10;
         }
 
         Collections.sort(digits);
@@ -47,7 +47,7 @@ public class Task6 {
         int result = 0;
         int listSize = list.size();
         for (int i = 0; i < listSize; i++) {
-            result += (int) (list.get(i) * Math.pow(TEN, i));
+            result += (int) (list.get(i) * Math.pow(10, i));
         }
 
         return result;
