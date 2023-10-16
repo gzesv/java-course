@@ -2,18 +2,23 @@ package edu.hw1;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class Task1Test {
 
-    @Test
-    @DisplayName("Корректные входные данные, time = 01:00")
-    void test1() {
-        String time = "01:00";
-
+    @DisplayName("Корректные входные данные")
+    @ParameterizedTest
+    @CsvSource({
+        "01:00, 60",
+        "13:56, 836",
+        "00:01, 1"
+    })
+    void test1(String time, int expected) {
         int seconds = Task1.minutesToSeconds(time);
 
-        assertThat(seconds).isEqualTo(60);
+        assertThat(seconds).isEqualTo(expected);
     }
 
     @Test
