@@ -12,7 +12,7 @@ public class Task8 {
                     continue;
                 }
 
-                if (checkPosition(i, j, board)) {
+                if (isKnightInThisPosition(i, j, board)) {
                     return false;
                 }
             }
@@ -22,7 +22,7 @@ public class Task8 {
     }
 
     @SuppressWarnings("MagicNumber")
-    private static boolean checkPosition(int i, int j, int[][] board) {
+    private static boolean isKnightInThisPosition(int i, int j, int[][] board) {
         return (horseCanCapture(i + 1, j - 2, board)
             || horseCanCapture(i + 1, j + 2, board)
             || horseCanCapture(i - 1, j - 2, board)
