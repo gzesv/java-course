@@ -4,7 +4,8 @@ import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("HideUtilityClassConstructor")
 public class Task1 {
-    @SuppressWarnings("MagicNumber")
+    private static final int SECOND_IN_MINUTE = 60;
+
     public static int minutesToSeconds(@NotNull String time) {
         String[] minutesAndSeconds = time.split(":");
         if (minutesAndSeconds.length != 2) {
@@ -20,10 +21,10 @@ public class Task1 {
             return -1;
         }
 
-        if (seconds >= 60 || seconds < 0 || minutes < 0) {
+        if (seconds >= SECOND_IN_MINUTE || seconds < 0 || minutes < 0) {
             return -1;
         }
 
-        return minutes * 60 + seconds;
+        return minutes * SECOND_IN_MINUTE + seconds;
     }
 }
