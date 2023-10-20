@@ -32,7 +32,7 @@ public class ConsoleHangman {
 
             if (isGiveUpCommand(userInput)) {
                 GuessResult guessResult = session.giveUp();
-                printGameState(guessResult);
+                printMessageAndAnswerState(guessResult);
                 break;
             }
 
@@ -45,7 +45,7 @@ public class ConsoleHangman {
 
             GuessResult guessResult = session.guess(userGuess);
 
-            printGameState(guessResult);
+            printMessageAndAnswerState(guessResult);
         }
         LOGGER.info("До скорых встреч!");
     }
@@ -55,16 +55,6 @@ public class ConsoleHangman {
             return null;
         }
         return userInput.charAt(0);
-    }
-
-    private void printGameState(GuessResult guess) {
-        switch (guess) {
-            case GuessResult.Win win -> printMessageAndAnswerState(win);
-            case GuessResult.Defeat defeat -> printMessageAndAnswerState(defeat);
-            case GuessResult.SuccessfulGuess successfulGuess -> printMessageAndAnswerState(successfulGuess);
-            case GuessResult.FailedGuess failedGuess -> printMessageAndAnswerState(failedGuess);
-            case GuessResult.RepeatedGuess repeatedGuess -> printMessageAndAnswerState(repeatedGuess);
-        }
     }
 
     private boolean isGiveUpCommand(String input) {
