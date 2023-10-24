@@ -15,6 +15,6 @@ class CallingInfoTest {
         String methodName = callingInfo.methodName();
 
         assertThat(className).isEqualTo("edu.hw2.Task4.CallingInfoTest");
-        assertThat(methodName).isEqualTo("testCallingInfo");
+        assertThat(methodName).isEqualTo("callingInfo_test");
     }
 }
