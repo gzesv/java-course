@@ -8,7 +8,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class CallingInfoTest {
     @Test
     @DisplayName("Тест CallingInfo")
-    void testCallingInfo() {
+    void callingInfo_test() {
         CallingInfo callingInfo = callingInfo();
 
         String className = callingInfo.className();

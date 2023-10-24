@@ -18,7 +18,7 @@ class RectangleAndSquareTest {
     @ParameterizedTest
     @MethodSource("rectangles")
     @DisplayName("Площадь прямоугольника")
-    public void test1(Rectangle rectangle) {
+    public void rectangle_area_test(Rectangle rectangle) {
         Rectangle result = rectangle
             .setWidth(20.0)
             .setHeight(10.0);
@@ -28,7 +28,7 @@ class RectangleAndSquareTest {
 
     @Test
     @DisplayName("Площадь квадрата")
-    void test2(){
+    void square_area_test(){
         Square square = new Square(0);
 
         square = (Square) square.setSide(10);

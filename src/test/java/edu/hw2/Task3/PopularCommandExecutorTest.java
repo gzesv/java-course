@@ -12,7 +12,7 @@ class PopularCommandExecutorTest {
 
     @Test
     @DisplayName("Неисправное соединение через FaultyConnectionManager")
-    void testFaultyConnectionThroughFaultyConnectionManager() {
+    void faultyConnectionManager_return_faultyConnection_test() {
         ConnectionManager connectionManager = new FaultyConnectionManager(1.0);
         int maxAttempts = 100;
         PopularCommandExecutor executor = new PopularCommandExecutor(connectionManager, maxAttempts);
@@ -22,7 +22,7 @@ class PopularCommandExecutorTest {
 
     @Test
     @DisplayName("Стабильное соединение")
-    void testStableConnection() {
+    void defaultConnectionManager_return_stableConnection_test() {
         var connectionManager = new DefaultConnectionManager(0.0);
         int maxAttempts = 100;
         var executor = new PopularCommandExecutor(connectionManager, maxAttempts);
@@ -32,7 +32,7 @@ class PopularCommandExecutorTest {
 
     @Test
     @DisplayName("Неисправное соединение через DefaultConnectionManager")
-    void testFaultyConnectionThroughDefaultConnectionManager() {
+    void defaultConnectionManager_return_faultyConnection_test() {
         var connectionManager = new DefaultConnectionManager(1.0);
         int maxAttempts = 100;
         var executor = new PopularCommandExecutor(connectionManager, maxAttempts);

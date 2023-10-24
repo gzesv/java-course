@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ExprTest {
     @Test
     @DisplayName("Тест Constant")
-    void testConstant() {
+    void constant_test() {
         Expr constant = new Expr.Constant(157);
 
         double result = constant.evaluate();
@@ -17,7 +17,7 @@ class ExprTest {
 
     @Test
     @DisplayName("Тест Negate")
-    void testNegate() {
+    void negate_test() {
         Expr negate = new Expr.Negate(new Expr.Constant(1991.0));
 
         double result = negate.evaluate();
@@ -27,7 +27,7 @@ class ExprTest {
 
     @Test
     @DisplayName("Test Exponent")
-    void testExponent() {
+    void exponent_test() {
         Expr value = new Expr.Constant(9.0);
         Expr exponent = new Expr.Exponent(value, 2);
 
@@ -38,7 +38,7 @@ class ExprTest {
 
     @Test
     @DisplayName("Test Addition")
-    void testAddition() {
+    void addition_test() {
         Expr left = new Expr.Constant(11.0);
         Expr right = new Expr.Constant(111.0);
         Expr addition = new Expr.Addition(left, right);
@@ -50,7 +50,7 @@ class ExprTest {
 
     @Test
     @DisplayName("Test Multiplication")
-    void testMultiplication() {
+    void multiplication_test() {
         Expr left = new Expr.Constant(7.0);
         Expr right = new Expr.Constant(11.0);
         Expr multiplication = new Expr.Multiplication(left, right);
