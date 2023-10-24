@@ -6,11 +6,12 @@ import edu.project1.session.Session;
 import java.util.Scanner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import static edu.project1.validator.Validator.isGiveUpCommand;
+import static edu.project1.validator.Validator.isIncorrectInput;
 
 public class ConsoleHangman {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final int MAX_ATTEMPTS = 5;
-    private static final String END_GAME_COMMAND = "exit";
     private final IDictionary dictionary;
 
     public ConsoleHangman(IDictionary dictionary) {
@@ -36,29 +37,16 @@ public class ConsoleHangman {
                 break;
             }
 
-            Character userGuess = readUserGuess(userInput);
-
-            if (userGuess == null) {
+            if (isIncorrectInput(userInput)) {
                 LOGGER.info("Неверный формат ввода. Введите букву.");
                 continue;
             }
 
-            GuessResult guessResult = session.guess(userGuess);
+            GuessResult guessResult = session.guess(userInput.charAt(0));
 
             printMessageAndAnswerState(guessResult);
         }
         LOGGER.info("До скорых встреч!");
-    }
-
-    private Character readUserGuess(String userInput) {
-        if (userInput.length() != 1 || !Character.isLetter(userInput.charAt(0))) {
-            return null;
-        }
-        return userInput.charAt(0);
-    }
-
-    private boolean isGiveUpCommand(String input) {
-        return input.equals(END_GAME_COMMAND);
     }
 
     private void printMessageAndAnswerState(GuessResult guessResult) {

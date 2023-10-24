@@ -10,7 +10,7 @@ public class HangmanTest {
 
     @Test
     @DisplayName("Игрок угадал слово")
-    void testSessionWin() {
+    void sessionWin_test() {
 
         String answer = "оооооо";
         int maxAttempts = 2;
@@ -25,7 +25,7 @@ public class HangmanTest {
 
     @Test
     @DisplayName("Игрок решил сдаться")
-    void testSessionGiveUp() {
+    void sessionGiveUp_test() {
 
         String answer = "буква";
         Session session = new Session(answer, 7);
@@ -39,7 +39,7 @@ public class HangmanTest {
 
     @Test
     @DisplayName("Угадана буква")
-    void testSessionSuccessfulGuess() {
+    void sessionSuccessfulGuess_test() {
 
         String answer = "молоко";
         Session session = new Session(answer, 5);
@@ -52,7 +52,7 @@ public class HangmanTest {
 
     @Test
     @DisplayName("Ввод символа который уже был")
-    void testRepeatedInput() {
+    void repeatedInput_() {
 
         String answer = "молоко";
         Session session = new Session(answer, 7);
@@ -70,7 +70,7 @@ public class HangmanTest {
 
     @Test
     @DisplayName("Закончились попытки. Игрок проиграл.")
-    void testAttemptsAreOver() {
+    void attemptsAreOver_test() {
 
         String answer = "молоко";
         int maxAttempts = 2;
