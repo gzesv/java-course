@@ -17,17 +17,20 @@ public class Stock implements Comparable<Stock> {
         return Double.compare(price, other.price);
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (getClass() != obj.getClass()) {
+    @Override public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
 
-        if (this == obj) {
-            return true;
-        }
+        Stock stock = (Stock) o;
 
-        return hashCode() == obj.hashCode();
+        if (Double.compare(price, stock.price) != 0) {
+            return false;
+        }
+        return Objects.equals(name, stock.name);
     }
 
     @Override

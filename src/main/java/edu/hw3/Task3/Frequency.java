@@ -10,8 +10,14 @@ public class Frequency {
         Map<T, Integer> frequencyMap = new HashMap<>();
 
         for (T item : list) {
-            frequencyMap.put(item, frequencyMap.getOrDefault(item, 0) + 1);
+            frequencyMap.compute(item, (k, v) -> (v == null)
+                                                    ? 1
+                                                    : v + 1);
         }
+
+        //for (T item : list) {
+        //    frequencyMap.put(item, frequencyMap.getOrDefault(item, 0) + 1);
+        //}
 
         return frequencyMap;
     }
