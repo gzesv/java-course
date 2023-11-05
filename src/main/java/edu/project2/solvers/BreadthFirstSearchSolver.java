@@ -1,6 +1,6 @@
 package edu.project2.solvers;
 
-import edu.project2.Utils.Moves;
+import edu.project2.Utils.Move;
 import edu.project2.maze.Cell;
 import edu.project2.maze.Coordinate;
 import edu.project2.maze.Maze;
@@ -14,11 +14,11 @@ import static edu.project2.maze.Cell.Type.PASSAGE;
 
 public class BreadthFirstSearchSolver implements Solver {
 
-    private final List<Moves> moves = List.of(
-        new Moves(1, 0),
-        new Moves(0, 1),
-        new Moves(-1, 0),
-        new Moves(0, -1)
+    private final List<Move> moves = List.of(
+        new Move(1, 0),
+        new Move(0, 1),
+        new Move(-1, 0),
+        new Move(0, -1)
     );
 
     @Override
@@ -42,7 +42,7 @@ public class BreadthFirstSearchSolver implements Solver {
                 break;
             }
 
-            for (Moves move : this.moves) {
+            for (Move move : this.moves) {
                 int newRow = currentCell.row() + move.x();
                 int newCol = currentCell.col() + move.y();
                 if (isInside(newRow, newCol, grid.length, grid[0].length)

@@ -1,6 +1,6 @@
 package edu.project2.generators;
 
-import edu.project2.Utils.Moves;
+import edu.project2.Utils.Move;
 import edu.project2.maze.Cell;
 import edu.project2.maze.Maze;
 import java.util.List;
@@ -9,9 +9,9 @@ import static edu.project2.maze.Cell.Type.PASSAGE;
 import static edu.project2.maze.Cell.Type.WALL;
 
 public class BinaryTreeGenerator implements Generator {
-    private final List<Moves> moves = List.of(
-        new Moves(1, 0),
-        new Moves(0, 1)
+    private final List<Move> moves = List.of(
+        new Move(1, 0),
+        new Move(0, 1)
     );
 
     private final Random random = new Random();
@@ -22,7 +22,7 @@ public class BinaryTreeGenerator implements Generator {
         Cell[][] grid = maze.getGrid();
         int cellRow;
         int cellCol;
-        Moves move;
+        Move move;
 
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
