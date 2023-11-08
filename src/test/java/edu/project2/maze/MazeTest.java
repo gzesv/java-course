@@ -44,8 +44,7 @@ class MazeTest {
 
         Cell[][] grid = maze.getGrid();
 
-        assertThat(grid).isEqualTo(new Cell[][]
-            {
+        assertThat(grid).isEqualTo(new Cell[][] {
                 new Cell[2],
                 new Cell[2]
             }
@@ -54,7 +53,7 @@ class MazeTest {
 
     @Test
     @DisplayName("Создане лабиринта с некорректными данными")
-    public void maze_getHeight1_test() {
+    public void mazeCreate_incorrectWidth_test() {
         int height = 0;
         int width = -1;
 
@@ -63,31 +62,24 @@ class MazeTest {
             () -> new Maze(height, width)
         );
 
-        assertThat(exception)
-            .isNotNull()
-            .isInstanceOf(IllegalArgumentException.class);
-
         assertThat(exception.getMessage())
             .isEqualTo("Некорректные размеры лабиринта");
     }
 
     @Test
     @DisplayName("Получение ячейки за пределами лабиринта")
-    void mazeGetCellIncorrectHeight() {
-        // given
+    void mazeGetCellIncorrectHeight_test() {
         int height = 2;
         int width = 2;
         Maze maze = new Maze(height, width);
 
-        // when
         Exception exception = assertThrows(
             IllegalArgumentException.class,
             () -> maze.getCell(100, 1)
         );
 
-        // then
-        assertThat(exception).isNotNull().isInstanceOf(IllegalArgumentException.class);
-        assertThat(exception.getMessage()).isEqualTo("Такой ячейки не существует");
+        assertThat(exception.getMessage())
+            .isEqualTo("Такой ячейки не существует");
     }
 
 }

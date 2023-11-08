@@ -62,8 +62,8 @@ class SimpleRendererTest {
             () -> simpleRenderer.render(maze, path)
         );
 
-        assertThat(exception).isNotNull().isInstanceOf(IllegalArgumentException.class);
-        assertThat(exception.getMessage()).isEqualTo("Лабиринт не может быть null!");
+        assertThat(exception.getMessage())
+            .isEqualTo("Лабиринт не может быть null");
     }
 
     @Test
@@ -78,8 +78,8 @@ class SimpleRendererTest {
             () -> simpleRenderer.render(maze, path)
         );
 
-        assertThat(exception).isNotNull().isInstanceOf(IllegalArgumentException.class);
-        assertThat(exception.getMessage()).isEqualTo("Путь не может быть null!");
+        assertThat(exception.getMessage())
+            .isEqualTo("Путь не может быть null");
     }
 
     private Maze getTestMaze() {

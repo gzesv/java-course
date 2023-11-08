@@ -17,11 +17,11 @@ public class SimpleRenderer implements Renderer {
     @Override
     public String render(Maze maze, List<Coordinate> path) {
         if (maze == null) {
-            throw new IllegalArgumentException("Лабиринт не может быть null!");
+            throw new IllegalArgumentException("Лабиринт не может быть null");
         }
 
         if (path == null) {
-            throw new IllegalArgumentException("Путь не может быть null!");
+            throw new IllegalArgumentException("Путь не может быть null");
         }
 
         StringBuilder stringBuilder = new StringBuilder();
