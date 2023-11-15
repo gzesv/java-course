@@ -16,7 +16,7 @@ public class Friday13 {
 
         for (int i = 1; i <= Month.values().length; i++) {
             LocalDate day = LocalDate.of(year, i, 13);
-            if (day.getDayOfWeek().equals(DayOfWeek.FRIDAY)) {
+            if (day.getDayOfWeek() == DayOfWeek.FRIDAY) {
                 fridays.add(day);
             }
         }

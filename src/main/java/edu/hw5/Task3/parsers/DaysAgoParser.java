@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DaysAgoParser implements Parser {
+    private final static Pattern PATTERN = Pattern.compile("^(\\d*) day[s]? ago$");
 
     public boolean tryParse(String date) {
         return parse(date) != null;
@@ -12,9 +13,7 @@ public class DaysAgoParser implements Parser {
 
     @Override
     public LocalDate parse(String date) {
-        Pattern pattern = Pattern.compile("^(\\d*) day[s]? ago$");
-
-        Matcher matcher = pattern.matcher(date.toLowerCase());
+        Matcher matcher = PATTERN.matcher(date.toLowerCase());
 
         if (matcher.find()) {
             return LocalDate.now().minusDays(Integer.parseInt(matcher.group(1)));

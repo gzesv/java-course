@@ -43,6 +43,6 @@ class DateParserTest {
 
         Optional<LocalDate> date = DateParser.parseDate(dateString);
 
-        assertThat(date.isPresent()).isFalse();
+        assertThat(date).isNotPresent();
     }
 }
