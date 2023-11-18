@@ -7,37 +7,18 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.CleanupMode;
+import org.junit.jupiter.api.io.TempDir;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class DiskMapTest {
-    private static final Path FILE_PATH =
-        Path.of("src/test/java/edu/hw6/task1/test.txt");
+    private static final String FILE_PATH  = "/test.txt";
     private DiskMap diskMap;
-
-    @BeforeEach
-    void setUp() {
-        try {
-            Files.createFile(FILE_PATH);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        diskMap = new DiskMap(FILE_PATH);
-        diskMap.clear();
-    }
-
-    @AfterEach
-    void tearDown() {
-        if (Files.exists(FILE_PATH)) {
-            try {
-                Files.delete(FILE_PATH);
-            } catch (IOException ignored) {
-            }
-        }
-    }
 
     @Test
     @DisplayName("Сохранение")
-    void save_test() {
+    void save_test(@TempDir(cleanup = CleanupMode.ALWAYS) Path dir) {
+        diskMap = new DiskMap(Path.of(dir + FILE_PATH));
         String key = "key";
         String value = "value";
 
@@ -49,7 +30,8 @@ class DiskMapTest {
 
     @Test
     @DisplayName("Чтение")
-    void read_test() {
+    void read_test(@TempDir(cleanup = CleanupMode.ALWAYS) Path dir) {
+        diskMap = new DiskMap(Path.of(dir + FILE_PATH));
         String key = "key";
         String value = "value";
         diskMap.put(key, value);
@@ -62,7 +44,8 @@ class DiskMapTest {
     }
 
     @Test
-    void size_test() {
+    void size_test(@TempDir(cleanup = CleanupMode.ALWAYS) Path dir) {
+        diskMap = new DiskMap(Path.of(dir + FILE_PATH));
         String key = "key";
         String value = "value";
         diskMap.put(key, value);
@@ -73,7 +56,8 @@ class DiskMapTest {
     }
 
     @Test
-    void isEmpty_test() {
+    void isEmpty_test(@TempDir(cleanup = CleanupMode.ALWAYS) Path dir) {
+        diskMap = new DiskMap(Path.of(dir + FILE_PATH));
         String key = "key";
         String value = "value";
         diskMap.put(key, value);
@@ -89,7 +73,8 @@ class DiskMapTest {
     }
 
     @Test
-    void containsKey_test() {
+    void containsKey_test(@TempDir(cleanup = CleanupMode.ALWAYS) Path dir) {
+        diskMap = new DiskMap(Path.of(dir + FILE_PATH));
         String key = "key";
         String value = "value";
         diskMap.put(key, value);

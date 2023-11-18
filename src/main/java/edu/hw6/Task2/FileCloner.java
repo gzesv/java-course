@@ -10,7 +10,7 @@ public class FileCloner {
     private static final String FILE_NAME_SEPARATOR = "\\.";
     private static final String COPY_SUFFIX = " — копия";
 
-    public static void cloneFile(Path filePath) {
+    public static void cloneFile(Path filePath) throws IOException {
         String[] fullFileName = filePath.getFileName().toString().split(FILE_NAME_SEPARATOR);
         String name = fullFileName[0];
         String extension = fullFileName[1];
@@ -26,10 +26,6 @@ public class FileCloner {
             copyFilePath = directory.resolve(copyFileName);
         }
 
-        try {
-            Files.copy(filePath, copyFilePath);
-        } catch (IOException e) {
-            throw new RuntimeException();
-        }
+        Files.copy(filePath, copyFilePath);
     }
 }
