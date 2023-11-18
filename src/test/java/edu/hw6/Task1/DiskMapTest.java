@@ -1,19 +1,38 @@
 package edu.hw6.Task1;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class DiskMapTest {
-    private static final String FILE_PATH = "src/test/java/edu/hw6/task1/test.txt";
+    private static final Path FILE_PATH =
+        Path.of("src/test/java/edu/hw6/task1/test.txt");
     private DiskMap diskMap;
 
     @BeforeEach
     void setUp() {
-        diskMap = new DiskMap(Path.of(FILE_PATH));
+        try {
+            Files.createFile(FILE_PATH);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        diskMap = new DiskMap(FILE_PATH);
         diskMap.clear();
+    }
+
+    @AfterEach
+    void tearDown() {
+        if (Files.exists(FILE_PATH)) {
+            try {
+                Files.delete(FILE_PATH);
+            } catch (IOException ignored) {
+            }
+        }
     }
 
     @Test
@@ -63,7 +82,6 @@ class DiskMapTest {
 
         assertThat(isEmpty).isFalse();
 
-
         diskMap.clear();
         isEmpty = diskMap.isEmpty();
 
@@ -82,6 +100,5 @@ class DiskMapTest {
         assertThat(contains).isTrue();
         assertThat(notContains).isFalse();
     }
-
 
 }
