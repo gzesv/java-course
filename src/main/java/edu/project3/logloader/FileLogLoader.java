@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileLogLoader {
+public class FileLogLoader implements LogLoader {
     private final Path path;
     private List<String> records = new ArrayList<>();
 

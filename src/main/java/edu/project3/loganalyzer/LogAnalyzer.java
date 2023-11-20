@@ -2,10 +2,15 @@ package edu.project3.loganalyzer;
 
 import edu.project3.fileformat.FileFormat;
 import edu.project3.logloader.FileLogLoader;
+import edu.project3.logloader.HttpLogLoader;
+import edu.project3.logloader.LogLoader;
 import edu.project3.logrecord.LogRecord;
 import edu.project3.logreport.LogReport;
+import edu.project3.reportgenerator.AdocReportGenerator;
 import edu.project3.reportgenerator.MarkdownReportGenerator;
 import edu.project3.reportgenerator.ReportGenerator;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
@@ -18,12 +23,18 @@ public class LogAnalyzer {
     private OffsetDateTime from = OffsetDateTime.MIN;
     private OffsetDateTime to = OffsetDateTime.MAX;
     private FileFormat format;
-    FileLogLoader logLoader;
+    LogLoader logLoader;
     ReportGenerator reportGenerator;
 
     public void run(String[] args) {
         parseArgs(args);
-        logLoader = new FileLogLoader(Path.of(path));
+
+        if (isValidUrl()) {
+            logLoader = new HttpLogLoader(path);
+        } else {
+            logLoader = new FileLogLoader(Path.of(path));
+        }
+
         logLoader.readLogs();
 
         List<String> logs = logLoader.getRecords();
@@ -33,9 +44,13 @@ public class LogAnalyzer {
 
         LogReport logReport = new LogReport(logRecords, from, to);
 
-        reportGenerator = new MarkdownReportGenerator();
+        if (format == FileFormat.ADOC) {
+            reportGenerator = new AdocReportGenerator(logReport, from, to);
+        } else {
+            reportGenerator = new MarkdownReportGenerator(logReport, from, to);
+        }
 
-        reportGenerator.generate(logReport, from, to);
+        reportGenerator.generate();
     }
 
     private void parseArgs(String[] args) {
@@ -77,5 +92,14 @@ public class LogAnalyzer {
 
     private LocalDate parseDateString(String dateString) {
         return LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
+
+    private boolean isValidUrl() {
+        try {
+            new URL(path);
+            return true;
+        } catch (MalformedURLException e) {
+            return false;
+        }
     }
 }

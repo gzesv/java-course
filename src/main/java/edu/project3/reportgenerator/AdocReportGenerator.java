@@ -11,16 +11,16 @@ import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
-public class MarkdownReportGenerator implements ReportGenerator {
+public class AdocReportGenerator implements ReportGenerator {
     private static final DateTimeFormatter DATE_TIME_FORMATTER =
         DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
     private OffsetDateTime from;
     private OffsetDateTime to;
     private LogReport logReport;
-    private static final String FILE_FORMAT = "####";
+    private static final String FILE_FORMAT = "====";
 
-    public MarkdownReportGenerator(LogReport logReport, OffsetDateTime from, OffsetDateTime to) {
+    public AdocReportGenerator(LogReport logReport, OffsetDateTime from, OffsetDateTime to) {
         this.logReport = logReport;
         this.from = from;
         this.to = to;
@@ -30,7 +30,7 @@ public class MarkdownReportGenerator implements ReportGenerator {
     public void generate() {
         String fileName = "file";
         Path currentDirectory = Paths.get("src/main/java/edu/project3/").toAbsolutePath();
-        Path filePath = currentDirectory.resolve(fileName + ".md");
+        Path filePath = currentDirectory.resolve(fileName + ".adoc");
 
         try (PrintWriter writer = new PrintWriter(new FileWriter(filePath.toFile()))) {
             writeGeneralInfoSection(writer, fileName);
@@ -41,13 +41,14 @@ public class MarkdownReportGenerator implements ReportGenerator {
         }
     }
 
+    @SuppressWarnings("MultipleStringLiterals")
     private void writeGeneralInfoSection(PrintWriter writer, String fileName) {
         writer.println(FILE_FORMAT + " Общая информация\n");
         writer.println("|        Метрика        |     Значение |");
         writer.println("|:---------------------:|-------------:|");
         writer.println("|         Файл          | " + fileName + " |");
         writer.println("|    Начальная дата     | " + (this.from.isEqual(OffsetDateTime.MIN)
-            ? "-" : this.from.format(DATE_TIME_FORMATTER) + " |"));
+            ? "- |" : this.from.format(DATE_TIME_FORMATTER) + " |"));
         writer.println("|     Конечная дата     | " + (this.to.isEqual(OffsetDateTime.MAX)
             ? "- |" : this.to.format(DATE_TIME_FORMATTER) + " |"));
         writer.println("|  Количество запросов  | " + this.logReport.getTotalRequests() + " |");
