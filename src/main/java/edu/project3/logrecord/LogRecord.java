@@ -51,8 +51,20 @@ public class LogRecord {
         }
     }
 
+    public String getRemoteAddress() {
+        return remoteAddress;
+    }
+
+    public String getRemoteUser() {
+        return remoteUser;
+    }
+
     public OffsetDateTime getTimeLocal() {
         return timeLocal;
+    }
+
+    public String getRequest() {
+        return request;
     }
 
     public int getStatus() {
@@ -61,6 +73,18 @@ public class LogRecord {
 
     public int getBodyBytesSent() {
         return bodyBytesSent;
+    }
+
+    public String getHttpReferer() {
+        return httpReferer;
+    }
+
+    public String getHttpUserAgent() {
+        return httpUserAgent;
+    }
+
+    public String getCodeResponse() {
+        return codeResponse;
     }
 
     public String getSource() {

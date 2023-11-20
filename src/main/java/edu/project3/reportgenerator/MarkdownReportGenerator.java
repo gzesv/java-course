@@ -46,10 +46,7 @@ public class MarkdownReportGenerator implements ReportGenerator {
         }
     }
 
-    public void writeGeneralInfoSection(
-        PrintWriter writer,
-        String fileName
-    ) {
+    public void writeGeneralInfoSection(PrintWriter writer, String fileName) {
         writer.println(FILE_FORMAT + " Общая информация\n");
         writer.println("|        Метрика        |     Значение |");
         writer.println("|:---------------------:|-------------:|");
@@ -63,9 +60,7 @@ public class MarkdownReportGenerator implements ReportGenerator {
         writer.println();
     }
 
-    private void writeResourceSection(
-        PrintWriter writer
-    ) {
+    private void writeResourceSection(PrintWriter writer) {
         writer.println(FILE_FORMAT + " Запрашиваемые ресурсы\n");
         writer.println("|     Ресурс      |         Количество       |");
         writer.println("|:---------------:|-------------------------:|");
@@ -77,9 +72,7 @@ public class MarkdownReportGenerator implements ReportGenerator {
         writer.println();
     }
 
-    public void writeResponseCodeSection(
-        PrintWriter writer
-    ) {
+    private void writeResponseCodeSection(PrintWriter writer) {
         writer.println(FILE_FORMAT + " Коды ответа\n");
         writer.println("| Код |          Имя          | Количество |");
         writer.println("|:---:|:---------------------:|-----------:|");
