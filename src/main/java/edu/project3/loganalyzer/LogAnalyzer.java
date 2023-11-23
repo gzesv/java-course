@@ -86,7 +86,7 @@ public class LogAnalyzer {
         this.from = parseDateString(stringFrom).atStartOfDay(ZoneOffset.UTC).toOffsetDateTime();
     }
 
-    public void setTo(String stringTo) {
+    private void setTo(String stringTo) {
         this.to = parseDateString(stringTo).atStartOfDay(ZoneOffset.UTC).toOffsetDateTime();
     }
 
