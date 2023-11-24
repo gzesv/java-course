@@ -10,6 +10,10 @@ public class LogReport {
     private final OffsetDateTime from;
     private final OffsetDateTime to;
     private final List<LogRecord> logRecords;
+    private final Map<String, Integer> resourceCount = new HashMap<>();
+    private final Map<Integer, Integer> responseCodeCount = new HashMap<>();
+    private long totalRequests = 0;
+    private long totalResponseSize = 0;
 
     public LogReport(
         List<LogRecord> logReport,
@@ -21,11 +25,6 @@ public class LogReport {
         this.to = to;
         analyzeLogs();
     }
-
-    private final Map<String, Integer> resourceCount = new HashMap<>();
-    private final Map<Integer, Integer> responseCodeCount = new HashMap<>();
-    private long totalRequests = 0;
-    private long totalResponseSize = 0;
 
     private void analyzeLogs() {
         for (LogRecord logRecord : logRecords) {
