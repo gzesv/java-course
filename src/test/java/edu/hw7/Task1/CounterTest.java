@@ -7,7 +7,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class CounterTest {
     @ParameterizedTest
     @CsvSource({"111,1", "2,4", "10,100", "12345,200"})
-    void increment_test(int initialValue, int threadsCount) {
+    void increment_test(int initialValue, int threadsCount) throws InterruptedException {
         int result = Counter.increment(initialValue, threadsCount);
 
         assertThat(result).isEqualTo(initialValue + threadsCount);
