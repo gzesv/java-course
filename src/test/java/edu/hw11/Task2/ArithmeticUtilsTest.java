@@ -4,23 +4,22 @@ import net.bytebuddy.ByteBuddy;
 import net.bytebuddy.agent.ByteBuddyAgent;
 import net.bytebuddy.dynamic.loading.ClassReloadingStrategy;
 import net.bytebuddy.implementation.MethodDelegation;
+import net.bytebuddy.matcher.ElementMatchers;
 import org.junit.jupiter.api.Test;
-import static net.bytebuddy.matcher.ElementMatchers.named;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ArithmeticUtilsTest {
     @Test
-    void delegateRedefineSum() throws Exception {
+    void redefineSum_test() {
         ByteBuddyAgent.install();
-        Class<?> Redefined = new ByteBuddy()
+
+        new ByteBuddy()
             .redefine(ArithmeticUtils.class)
-            .method(named("sum"))
+            .method(ElementMatchers.named("sum"))
             .intercept(MethodDelegation.to(RedefinedArithmeticUtils.class))
             .make()
-            .load(ArithmeticUtils.class.getClassLoader(), ClassReloadingStrategy.fromInstalledAgent())
-            .getLoaded();
+            .load(ArithmeticUtils.class.getClassLoader(), ClassReloadingStrategy.fromInstalledAgent());
 
-        ArithmeticUtils redefined = (ArithmeticUtils) Redefined.getDeclaredConstructor().newInstance();
-        assertThat(redefined.sum(7, 7)).isEqualTo(49);
+        assertThat(ArithmeticUtils.sum(7, 7)).isEqualTo(49);
     }
 }
