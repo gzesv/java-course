@@ -188,6 +188,13 @@
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <version>${jacoco-maven-plugin.version}</version>
+                    <configuration>
+                        <excludes>
+                            <exclude>*ArithmeticUtils*</exclude>
+                            <exclude>*ArithmeticUtilsTest*</exclude>
+                            <exclude>*RedefinedArithmeticUtils*</exclude>
+                        </excludes>
+                    </configuration>
                     <executions>
                         <execution>
                             <goals>
